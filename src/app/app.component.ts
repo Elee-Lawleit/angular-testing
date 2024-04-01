@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MyCustomDirectivesModule } from './modules/directive-module.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, MyCustomDirectivesModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -13,7 +14,7 @@ export class AppComponent {
   title = 'test-project';
   count: number = 0;
   show: boolean = true;
-  frameworks: string[] = ["react", "angular", "vue", "nextjs"]
+  frameworks: string[] = ['react', 'angular', 'vue', 'nextjs'];
 
   increment(event: MouseEvent) {
     this.count = this.count + 1;
@@ -23,10 +24,9 @@ export class AppComponent {
     this.count = this.count - 1;
   }
 
-  showHidePara(){
-    console.log(this.show)
+  showHidePara() {
+    console.log(this.show);
     this.show = !this.show;
-    console.log(this.show)
+    console.log(this.show);
   }
-
 }

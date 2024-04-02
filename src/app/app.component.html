@@ -7,17 +7,25 @@
 
   <button (click)="showHidePara()">Show/Hide Paragraph</button>
 
-
   <!-- this is to print a list, or to loop and return html tags -->
   <ol type="1">
-    <li *ngFor="let framework of frameworks">{{framework}}</li>
+    <li *ngFor="let framework of frameworks">{{ framework }}</li>
   </ol>
 
-  <p customHighlightDirective>This should be highlighted red because of the custom directive. Let's see if this works!</p>
+  <p customHighlightDirective>
+    This should be highlighted red because of the custom directive. Let's see if
+    this works!
+  </p>
 
   <!-- setting up material UI-->
   <mat-slide-toggle>Toggle me</mat-slide-toggle>
-
   <app-custom-table></app-custom-table>
 
+  <!-- Template Reference Variable aka useRef hook in react -->
+  <!-- uses the hashtag syntax for the ref name -->
+  <h1 style="margin-top: 50px !important;">Template Reference Variable aka useRef hook in react</h1>
+  <input type="text" placeholder="Enter pokemon name..." #pokemonNameRef />
+  <button (click)="printInputElement(pokemonNameRef)">
+    Click to see the input element above
+  </button>
 </div>

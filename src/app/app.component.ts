@@ -23,6 +23,14 @@ export class AppComponent {
   count: number = 0;
   show: boolean = true;
   frameworks: string[] = ['react', 'angular', 'vue', 'nextjs'];
+  // Template Reference Variable
+  pokemonName: string = '';
+
+  printInputElement(element: HTMLInputElement){
+    console.log("Element: ", element)
+
+    console.log("element value: ", element.value)
+  }
 
   increment(event: MouseEvent) {
     this.count = this.count + 1;

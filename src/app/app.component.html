@@ -9,7 +9,8 @@
 
   <!-- this is to print a list, or to loop and return html tags -->
   <ol type="1">
-    <li *ngFor="let framework of frameworks">{{ framework }}</li>
+    <!-- you can also access index here btw -->
+    <li *ngFor="let framework of frameworks; let i = index">{{ framework }} ++ index: {{i}}</li>
   </ol>
 
   <p customHighlightDirective>
@@ -23,9 +24,56 @@
 
   <!-- Template Reference Variable aka useRef hook in react -->
   <!-- uses the hashtag syntax for the ref name -->
-  <h1 style="margin-top: 50px !important;">Template Reference Variable aka useRef hook in react</h1>
+  <h1 style="margin-top: 50px !important">
+    Template Reference Variable aka useRef hook in react
+  </h1>
   <input type="text" placeholder="Enter pokemon name..." #pokemonNameRef />
   <button (click)="printInputElement(pokemonNameRef)">
     Click to see the input element above
   </button>
+
+  <!-- Two ways of applying conditional styling we can use class.className="conditionVariable" or [ngClass]="{"className": variable/condition}" -->
+
+  <!-- can put multiple conditions in here as well btw -->
+  <p [class.conditionalRedColorClass]="applyRed">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid aperiam
+    maiores, autem facere ipsam odio. Ducimus voluptates amet, ex commodi non
+    error fugiat accusamus? Amet, officia alias saepe vero reprehenderit tenetur
+    animi!
+  </p>
+
+  <!-- can put in multiple classes using ngStyle, I think this is better honestly -->
+  <!-- also, don't need to wrap single word class names in bold -->
+  <p [ngClass]="{ 'conditional-green-color': applyGreen, bold: shouldBold }">
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero laboriosam
+    neque ipsum magnam sed odit quisquam, nulla, hic sit maiores quos eum nisi
+    voluptatibus repellendus laudantium obcaecati fuga adipisci deleniti illo
+    culpa.
+  </p>
+  <button (click)="toggleBooleanRed()">Toggle Red Color</button>
+  <button (click)="toggleBooleanGreen()">Toggle Green Color</button>
+  <button (click)="toggleBold()">Toggle Bold Text</button>
+
+  <!-- similarly, two ways to give inline styles -->
+  <p [style.fontWeight]="shouldBold ? '900' : '400'">ngStyle demo</p>
+  <!-- same thing -->
+  <p [style.font-weight]="shouldBold ? '900' : '400'">ngStyle demo</p>
+  <!-- can write both normal property names in qoutes or jsx style property names -->
+  <p [ngStyle]="{ 'background-color': 'green', borderRadius: '20px' }">
+    another paragraph
+  </p>
+
+  <!-- basically we can make this kind of workflow as well, where we check the condition and conditionally render templates according to the ngIf value, and it won't show the other one btw, only the template that contains the true value will be shown -->
+  <ng-container
+    *ngIf="frameworks.length; then frameworkList; else noFrameworks"
+  />
+
+  <ng-template #frameworkList>
+    <h1>All available frameworks</h1>
+    <p>......</p>
+  </ng-template>
+
+  <ng-template #noFrameworks>
+    <h1>no data...</h1>
+  </ng-template>
 </div>

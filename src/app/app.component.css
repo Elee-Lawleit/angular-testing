@@ -1,0 +1,11 @@
+.conditionalRedColorClass{
+  background-color: red;
+}
+
+.conditional-green-color{
+  background-color: green;
+}
+
+.bold{
+  font-weight: bold;
+}

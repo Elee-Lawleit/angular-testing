@@ -25,11 +25,14 @@ export class AppComponent {
   frameworks: string[] = ['react', 'angular', 'vue', 'nextjs'];
   // Template Reference Variable
   pokemonName: string = '';
+  applyRed: boolean = false;
+  applyGreen: boolean = false;
+  shouldBold: boolean = false
 
-  printInputElement(element: HTMLInputElement){
-    console.log("Element: ", element)
+  printInputElement(element: HTMLInputElement) {
+    console.log('Element: ', element);
 
-    console.log("element value: ", element.value)
+    console.log('element value: ', element.value);
   }
 
   increment(event: MouseEvent) {
@@ -44,5 +47,15 @@ export class AppComponent {
     console.log(this.show);
     this.show = !this.show;
     console.log(this.show);
+  }
+
+  toggleBooleanRed() {
+    this.applyRed = !this.applyRed;
+  }
+  toggleBooleanGreen() {
+    this.applyGreen = !this.applyGreen;
+  }
+  toggleBold(){
+    this.shouldBold = !this.shouldBold
   }
 }

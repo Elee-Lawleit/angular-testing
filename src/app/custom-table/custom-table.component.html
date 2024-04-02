@@ -25,12 +25,22 @@
 
     <ng-container matColumnDef="atomic_number">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Atomic Number</th>
-      <td mat-cell *matCellDef="let row; let i = index">{{row.atomic_number}}</td>
+      <td mat-cell *matCellDef="let row; let i = index">
+        {{ row.atomic_number }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="symbol">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Symbol</th>
-      <td mat-cell *matCellDef="let row; let i = index">{{row.symbol}}</td>
+      <td mat-cell *matCellDef="let row; let i = index">{{ row.symbol }}</td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+      <td mat-cell *matCellDef="let row; let i = index">
+        <button mat-icon-button color="warn" (click)="deleteRow(row.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
     </ng-container>
 
     <!-- these are the row tags, basically we are defining header row and then below, we are also defining the normal rows -->
@@ -53,4 +63,25 @@
     aria-label="Select page"
   >
   </mat-paginator>
+</div>
+
+<div>
+  <h1>Insert form</h1>
+  <form (ngSubmit)="onSubmit()">
+    <label for="name">Enter name: </label>
+    <input [(ngModel)]="name" type="text" id="name" name="name" />
+
+    <label for="atomic_number">Enter atomic_number: </label>
+    <input
+      [(ngModel)]="atomicNumber"
+      type="number"
+      id="atomic_number"
+      name="atomic_number"
+    />
+
+    <label for="symbol">Enter symbol: </label>
+    <input [(ngModel)]="symbol" type="text" id="symbol" name="symbol" />
+
+    <input type="submit" value="Insert Element" />
+  </form>
 </div>

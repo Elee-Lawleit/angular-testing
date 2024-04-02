@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MyCustomDirectivesModule } from './modules/directive-module.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CustomTableComponent } from './custom-table/custom-table.component';
+import { CustomTreeComponent } from './custom-tree/custom-tree.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { CustomTableComponent } from './custom-table/custom-table.component';
     MyCustomDirectivesModule,
     MatSlideToggleModule,
     CustomTableComponent,
+    CustomTreeComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -27,7 +29,7 @@ export class AppComponent {
   pokemonName: string = '';
   applyRed: boolean = false;
   applyGreen: boolean = false;
-  shouldBold: boolean = false
+  shouldBold: boolean = false;
 
   printInputElement(element: HTMLInputElement) {
     console.log('Element: ', element);
@@ -55,7 +57,7 @@ export class AppComponent {
   toggleBooleanGreen() {
     this.applyGreen = !this.applyGreen;
   }
-  toggleBold(){
-    this.shouldBold = !this.shouldBold
+  toggleBold() {
+    this.shouldBold = !this.shouldBold;
   }
 }

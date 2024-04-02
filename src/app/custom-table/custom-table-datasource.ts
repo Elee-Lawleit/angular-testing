@@ -8,31 +8,34 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 export interface CustomTableItem {
   name: string;
   id: number;
+  atomic_number: number
+  symbol: string
 }
 
 // TODO: replace this with real data from your application
+//we could fetch data for the table obv
 const EXAMPLE_DATA: CustomTableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
-];
+    { "id": 1, name: "Hydrogen", atomic_number: 1, symbol: "H" },
+    { "id": 2, name: "Helium", atomic_number: 2, symbol: "He" },
+    { "id": 3, name: "Lithium", atomic_number: 3, symbol: "Li" },
+    { "id": 4, name: "Beryllium", atomic_number: 4, symbol: "Be" },
+    { "id": 5, name: "Boron", atomic_number: 5, symbol: "B" },
+    { "id": 6, name: "Carbon", atomic_number: 6, symbol: "C" },
+    { "id": 7, name: "Nitrogen", atomic_number: 7, symbol: "N" },
+    { "id": 8, name: "Oxygen", atomic_number: 8, symbol: "O" },
+    { "id": 9, name: "Fluorine", atomic_number: 9, symbol: "F" },
+    { "id": 10, name: "Neon", atomic_number: 10, symbol: "Ne" },
+    { "id": 11, name: "Sodium", atomic_number: 11, symbol: "Na" },
+    { "id": 12, name: "Magnesium", atomic_number: 12, symbol: "Mg" },
+    { "id": 13, name: "Aluminum", atomic_number: 13, symbol: "Al" },
+    { "id": 14, name: "Silicon", atomic_number: 14, symbol: "Si" },
+    { "id": 15, name: "Phosphorus", atomic_number: 15, symbol: "P" },
+    { "id": 16, name: "Sulfur", atomic_number: 16, symbol: "S" },
+    { "id": 17, name: "Chlorine", atomic_number: 17, symbol: "Cl" },
+    { "id": 18, name: "Argon", atomic_number: 18, symbol: "Ar" },
+    { "id": 19, name: "Potassium", atomic_number: 19, symbol: "K" },
+    { "id": 20, name: "Calcium", atomic_number: 20, symbol: "Ca" },
+]
 
 /**
  * Data source for the CustomTable view. This class should
@@ -71,12 +74,14 @@ export class CustomTableDataSource extends DataSource<CustomTableItem> {
    * any open connections or free any held resources that were set up during connect.
    */
   disconnect(): void {}
+  // so you could I guess clean up http conncetions or even socket connections if the table is being updated in real time
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
   private getPagedData(data: CustomTableItem[]): CustomTableItem[] {
+    // very simple client side pagination logic
     if (this.paginator) {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return data.splice(startIndex, this.paginator.pageSize);
@@ -90,6 +95,7 @@ export class CustomTableDataSource extends DataSource<CustomTableItem> {
    * this would be replaced by requesting the appropriate data from the server.
    */
   private getSortedData(data: CustomTableItem[]): CustomTableItem[] {
+    // and very simple sort logic
     if (!this.sort || !this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -98,7 +104,10 @@ export class CustomTableDataSource extends DataSource<CustomTableItem> {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
         case 'name': return compare(a.name, b.name, isAsc);
+        // this is changing the symbol btw, just converting each minus into a plus
         case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'atomic_number': return compare(+a.id, +b.id, isAsc)
+        case 'symbol' : return compare(a.name, b.name, isAsc);
         default: return 0;
       }
     });

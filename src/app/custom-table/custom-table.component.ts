@@ -9,7 +9,7 @@ import { CustomTableDataSource, CustomTableItem } from './custom-table-datasourc
   templateUrl: './custom-table.component.html',
   styleUrl: './custom-table.component.css',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule]
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule],
 })
 export class CustomTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -18,7 +18,7 @@ export class CustomTableComponent implements AfterViewInit {
   dataSource = new CustomTableDataSource();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['id', 'name', 'atomic_number', 'symbol'];
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

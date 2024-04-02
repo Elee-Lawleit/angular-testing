@@ -2,11 +2,19 @@ import { Component, NgModule } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MyCustomDirectivesModule } from './modules/directive-module.module';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CustomTableComponent } from './custom-table/custom-table.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, MyCustomDirectivesModule],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    MyCustomDirectivesModule,
+    MatSlideToggleModule,
+    CustomTableComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

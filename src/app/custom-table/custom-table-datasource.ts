@@ -1,7 +1,7 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
+import { last, map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
@@ -126,9 +126,8 @@ export class CustomTableDataSource extends DataSource<CustomTableItem> {
 
   insertRow(name: string, atomic_number: number, symbol: string) {
     const lastElement = this.data.pop();
-    this.data.push(lastElement!)
 
-    const updatedData = this.data
+    const updatedData = [...this.data, lastElement]
 
     updatedData.push({
       id: this.data.length === 0 ? 1 : lastElement!.id + 1,
@@ -136,11 +135,12 @@ export class CustomTableDataSource extends DataSource<CustomTableItem> {
       atomic_number,
       symbol,
     });
-    this.data = updatedData
-
+    this.data = updatedData as []
+    this.connect()
   }
   deleteRow(id: number) {
     this.data = this.data.filter((element) => element.id !== id);
+    this.connect()
   }
   updateRow(id: number) {
     // gonna think about this one

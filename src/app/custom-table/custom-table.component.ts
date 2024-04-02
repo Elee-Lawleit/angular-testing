@@ -34,8 +34,6 @@ export class CustomTableComponent implements AfterViewInit {
   atomicNumber: number = -1;
   symbol: string = '';
 
-  deleteId: number = 0;
-
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name', 'atomic_number', 'symbol', 'action'];
 
@@ -47,9 +45,15 @@ export class CustomTableComponent implements AfterViewInit {
 
   onSubmit() {
     this.dataSource.insertRow(this.name, this.atomicNumber, this.symbol);
-  }
 
+    //to make it re render
+    this.paginator._changePageSize(this.paginator.pageSize); 
+  }
+  
   deleteRow(id: number) {
     this.dataSource.deleteRow(id);
+    
+    //to make it re render
+    this.paginator._changePageSize(this.paginator.pageSize); 
   }
 }
